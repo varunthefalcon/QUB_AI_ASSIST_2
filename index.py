@@ -23,9 +23,7 @@ gc = gspread.service_account_from_dict(
     }
 )
 
-sh = gc.open_by_url(
-    "https://docs.google.com/spreadsheets/d/1MFytQYnb3xHhBW3-hWcPrb2vni0mBcYDkT9yca7UlwI"
-)
+sh = gc.open_by_url(os.environ.get("google_sheet_link"))
 
 promptTemplateSheet = sh.get_worksheet(2)
 
@@ -150,9 +148,7 @@ with st.form("my_form"):
 
 with col25:
     # st.header("Section 1")
-    st.markdown(
-        "[Sheet Link](https://docs.google.com/spreadsheets/d/1MFytQYnb3xHhBW3-hWcPrb2vni0mBcYDkT9yca7UlwI/edit#gid=1074032545)"
-    )
+    st.markdown(r"[Sheet Link]({})".format(os.environ.get("google_sheet_link")))
 
 
 if st.session_state["response"]:
